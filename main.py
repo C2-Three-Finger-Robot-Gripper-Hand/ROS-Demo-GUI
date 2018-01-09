@@ -3,6 +3,7 @@ from PyQt4 import QtGui
 import sys
 import main_frame
 import rospy
+import time
 from std_msgs.msg import Int16
 
 
@@ -11,6 +12,9 @@ class GripperHandGui:
         self.init_gui()
         self.init_ros()
         self.frame.show()
+        while(1):
+           QtGui.QApplication.processEvents()
+           time.sleep(0.05)
         sys.exit(self.app.exec_())
 
     def init_gui(self):
@@ -29,6 +33,10 @@ class GripperHandGui:
         self.ui.Finger3_motor2_slider.valueChanged.connect(self.finger3_motor2_set)
         self.ui.Finger3_motor3_slider.valueChanged.connect(self.finger3_motor3_set)
 
+        self.ui.Finger1_calibrate.clicked.connect(self.finger1_calibrate)
+
+
+
     def init_ros(self):
         rospy.init_node('gripper-gui', anonymous=True)
 
@@ -41,6 +49,8 @@ class GripperHandGui:
         rospy.Subscriber("finger3_motor1_value", Int16, self.finger3_motor1_callback)
         rospy.Subscriber("finger3_motor2_value", Int16, self.finger3_motor2_callback)
         rospy.Subscriber("finger3_motor3_value", Int16, self.finger3_motor3_callback)
+
+        self.finger1_calibrate = rospy.Publisher('finger1_calibrate', Int16, queue_size=10)
 
         self.finger1_motor1_set = rospy.Publisher('finger1_motor1_set', Int16, queue_size=10)
         self.finger1_motor2_set = rospy.Publisher('finger1_motor2_set', Int16, queue_size=10)
@@ -74,13 +84,13 @@ class GripperHandGui:
         self.ui.set_finger2_motor3_value(data.data)
 
     def finger3_motor1_callback(self, data):
-        self.ui.set_finger1_motor1_value(data.data)
+        self.ui.set_finger3_motor1_value(data.data)
 
     def finger3_motor2_callback(self, data):
-        self.ui.set_finger1_motor2_value(data.data)
+        self.ui.set_finger3_motor2_value(data.data)
 
     def finger3_motor3_callback(self, data):
-        self.ui.set_finger1_motor3_value(data.data)
+        self.ui.set_finger3_motor3_value(data.data)
 
     #
     # set functions
@@ -111,6 +121,9 @@ class GripperHandGui:
 
     def finger3_motor3_set(self, value):
         self.finger3_motor3_set.publish(value)
+
+    def finger1_calibrate(self, value):
+        self.finger1_calibrate.publish(1)
 
 
 if __name__ == "__main__":

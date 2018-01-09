@@ -143,6 +143,12 @@ class Ui_main_frame(object):
         self.Finger1_pressure_value.setSegmentStyle(QtGui.QLCDNumber.Flat)
         self.Finger1_pressure_value.setObjectName(_fromUtf8("Finger1_pressure_value"))
         self.Finger1_formlayout.setWidget(9, QtGui.QFormLayout.FieldRole, self.Finger1_pressure_value)
+
+        self.Finger1_calibrate = QtGui.QPushButton(self.Finger1_widget)
+        self.Finger1_calibrate.setObjectName(_fromUtf8("pushButton"))
+        self.Finger1_formlayout.setWidget(10, QtGui.QFormLayout.FieldRole, self.Finger1_calibrate)
+
+
         spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.Finger1_formlayout.setItem(3, QtGui.QFormLayout.FieldRole, spacerItem3)
         self.verticalLayout_2.addLayout(self.Finger1_formlayout)
@@ -246,6 +252,11 @@ class Ui_main_frame(object):
         self.Finger2_pressure_value = QtGui.QLCDNumber(self.Finger2_widget)
         self.Finger2_pressure_value.setSegmentStyle(QtGui.QLCDNumber.Flat)
         self.Finger2_pressure_value.setObjectName(_fromUtf8("Finger2_pressure_value"))
+
+        self.Finger2_calibrate = QtGui.QPushButton(self.Finger2_widget)
+        self.Finger2_calibrate.setObjectName(_fromUtf8("pushButton"))
+        self.Finger2_formlayout.setWidget(10, QtGui.QFormLayout.FieldRole, self.Finger2_calibrate)
+
         self.Finger2_formlayout.setWidget(9, QtGui.QFormLayout.FieldRole, self.Finger2_pressure_value)
         self.verticalLayout_10.addLayout(self.Finger2_formlayout)
         self.horizontalLayout_2.addWidget(self.Finger2_widget)
@@ -349,6 +360,11 @@ class Ui_main_frame(object):
         self.Finger3_pressure_value.setSegmentStyle(QtGui.QLCDNumber.Flat)
         self.Finger3_pressure_value.setObjectName(_fromUtf8("Finger3_pressure_value"))
         self.Finger3_formlayout.setWidget(9, QtGui.QFormLayout.FieldRole, self.Finger3_pressure_value)
+
+        self.Finger3_calibrate = QtGui.QPushButton(self.Finger3_widget)
+        self.Finger3_calibrate.setObjectName(_fromUtf8("pushButton"))
+        self.Finger3_formlayout.setWidget(10, QtGui.QFormLayout.FieldRole, self.Finger3_calibrate)
+
         self.verticalLayout_11.addLayout(self.Finger3_formlayout)
         self.horizontalLayout_2.addWidget(self.Finger3_widget)
         self.Hand_widget = QtGui.QWidget(self.widget)
@@ -435,7 +451,13 @@ class Ui_main_frame(object):
         self.pushButton_2.setText(_translate("main_frame", "Close hand", None))
         self.pushButton_3.setText(_translate("main_frame", "Idle hand", None))
 
+        self.Finger1_calibrate.setText(_translate("main_frame", "Calibrate", None))
+        self.Finger2_calibrate.setText(_translate("main_frame", "Calibrate", None))
+        self.Finger3_calibrate.setText(_translate("main_frame", "Calibrate", None))
+
+
     def set_finger1_motor1_value(self, value):
+        print("value: ", value)
         self.Finger1_motor1_value.display(value)
 
     def set_finger1_motor2_value(self, value):
